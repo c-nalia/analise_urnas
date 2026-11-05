@@ -1,0 +1,16 @@
+# Dados brutos do TSE: baixados de novo pelo link em raw/FONTE_DOS_DADOS.txt
+raw/*.csv
+raw/*.zip
+raw/*.sha512
+
+# Ambiente virtual
+.venv/
+__pycache__/
+
+# Checkpoints do Jupyter
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Sistema operacional
+Thumbs.db
+.DS_Store

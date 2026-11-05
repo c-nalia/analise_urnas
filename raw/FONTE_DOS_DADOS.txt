@@ -1,0 +1,55 @@
+FONTE DOS DADOS — BOLETINS DE URNA DO 2o TURNO DE 2026
+=======================================================
+
+Os 28 arquivos CSV originais (um por UF, mais ZZ para o exterior) NAO estao
+neste repositorio. Juntos somavam 882 MB, e o arquivo de Sao Paulo sozinho
+tinha 174 MB, acima do limite de 100 MB por arquivo do GitHub.
+
+Para a analise eles NAO sao necessarios: o arquivo bu_2t.parquet, na raiz do
+projeto, ja contem as 2.088.107 linhas e as 46 colunas originais consolidadas.
+
+
+ONDE BAIXAR
+-----------
+
+Portal de Dados Abertos do TSE, dataset "Resultados - 2026 - Boletim de Urna":
+
+    https://dadosabertos.tse.jus.br/dataset/resultados-2026-boletim-de-urna
+
+Licenca: Creative Commons Atribuicao (CC BY).
+
+
+COMO REFAZER O PARQUET
+----------------------
+
+1. Na pagina acima, baixe os arquivos de 2o turno de cada UF. Eles seguem o
+   padrao de nome bweb_2t_<UF>_261020260742.zip, por exemplo:
+
+       https://cdn.tse.jus.br/estatistica/sead/eleicoes/eleicoes2026/buweb/bweb_2t_AC_261020260742.zip
+       https://cdn.tse.jus.br/estatistica/sead/eleicoes/eleicoes2026/buweb/bweb_2t_SP_261020260742.zip
+
+   Sao 28 arquivos: as 27 UFs mais ZZ (votos do exterior).
+
+2. Descompacte todos nesta pasta (raw/), deixando os CSVs soltos aqui.
+
+3. No notebook main_refinado.ipynb, rode as celulas do inicio marcadas como
+   "Regeneracao do parquet". Elas leem raw/bweb_2t_*.csv e gravam de novo o
+   bu_2t.parquet. Nas execucoes normais essas celulas sao puladas.
+
+   Parametros de leitura, ja no notebook: separador ";" e encoding "latin-1".
+   Os CSVs do TSE nao sao UTF-8, por isso o visualizador do Jupyter se recusa
+   a abri-los direto.
+
+
+DOCUMENTACAO OFICIAL
+--------------------
+
+O dicionario de dados do TSE, que descreve as 46 colunas, esta nesta mesma
+pasta: _leiame-boletimurnaweb.pdf
+
+
+VERIFICACAO DE INTEGRIDADE
+--------------------------
+
+O TSE publica um hash SHA-512 ao lado de cada arquivo, com a extensao
+.zip.sha512, para conferir se o download veio integro.
